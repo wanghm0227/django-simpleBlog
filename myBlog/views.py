@@ -20,6 +20,14 @@ class ArticleDetailView(generic.DetailView):
     model = Post
     template_name = 'myBlog/article_detail.html'
 
+    def get_context_data(self, **kwargs):
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        liked = False
+        if post.likes.filter(pk=self.request.user.id):
+            liked = True
+        context = super().get_context_data(**kwargs)
+        context['liked'] = liked
+        return context
 
 # Add a new post.
 
@@ -78,6 +86,8 @@ def like(request, post_id):
         messages.error(request, 'Please login!')
         return redirect('article_detail', post_id)
     post = get_object_or_404(Post, pk=post_id)
-    user = User.objects.get(pk=request.user.id)
-    post.likes.add(user)
+    if not post.likes.filter(pk=request.user.id):
+        post.likes.add(request.user)
+    else:
+        post.likes.remove(request.user)
     return redirect('article_detail', post_id)

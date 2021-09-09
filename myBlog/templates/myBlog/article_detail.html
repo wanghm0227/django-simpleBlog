@@ -21,7 +21,7 @@
 	<br>
 	<form action="{% url 'like' post.pk %}" method="POST">
 		{% csrf_token %}
-		<button class="btn btn-primary btn-sm">Like: {{ post.total_likes }}</button>
+		<button class="{% if liked %} btn btn-danger btn-sm {% endif %} btn btn-primary btn-sm">Like: {{ post.total_likes }}</button>
 		{% if messages %}
 		{% for message in messages %}
 		<p><strong>{{ message }}</strong></p>
