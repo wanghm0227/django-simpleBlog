@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %} Add A New Category {% endblock %}
+{% block body %}
+<br />
+<h2>Add Category...</h2>
+<br />
+{% if user.is_authenticated %}
+<form method="POST">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Add Category" class="btn btn-secondary btn-sm" />
+</form>
+{% else %}
+<p><strong>Please login!</strong></p>
+{% endif %}
+
+{% endblock %}

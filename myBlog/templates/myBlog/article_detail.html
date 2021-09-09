@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %} {{ post.title }} - My Blog
+{% endblock %} {% block body %}
+<h1>{{ post.title }}</h1>
+<small>{{ post.author.first_name }} {{ post.author.last_name }}</small>
+<br />
+<small>{{ post.post_time }}</small>
+<br />
+
+<small>category: <a href="{% url 'category_posts' post.category %}">{{ post.category }}</a></small>
+<br />
+<small>tags: {{ post.tag }}</small>
+<hr />
+<p>{{ post.body|safe }}</p>
+<hr>
+<p>
+	<a href="{% url 'home' %}" class="btn btn-secondary btn-sm">Back to list</a>
+	{% if user.id == post.author.id %}
+	<a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit post</a>
+	<a href="{% url 'remove_post' post.pk %}" class="btn btn-secondary btn-sm">Delete post</a>
+	{% endif %}
+	<br>
+	<form action="{% url 'like' post.pk %}" method="POST">
+		{% csrf_token %}
+		<button class="btn btn-primary btn-sm">Like: {{ post.total_likes }}</button>
+		{% if messages %}
+		{% for message in messages %}
+		<p><strong>{{ message }}</strong></p>
+		{% endfor %}
+		{% endif %}
+	</form>
+</p>
+{% endblock %}
