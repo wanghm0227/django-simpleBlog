@@ -1,7 +1,8 @@
+from django.contrib.auth.forms import PasswordChangeForm
 from django.views import generic
 from django.urls import reverse_lazy
-from .forms import SignUpForm, EditProfileForm
-from django.contrib.auth.forms import UserChangeForm
+from .forms import SignUpForm, EditProfileForm, ChangePasswordForm
+from django.contrib.auth.views import PasswordChangeView
 
 
 class RegisterView(generic.CreateView):
@@ -17,3 +18,8 @@ class EditProfileView(generic.UpdateView):
 
     def get_object(self):
         return self.request.user
+
+
+class ChangePassword(PasswordChangeView):
+    form_class = ChangePasswordForm
+    template_name = 'registration/change_password.html'
