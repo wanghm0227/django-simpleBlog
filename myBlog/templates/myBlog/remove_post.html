@@ -8,7 +8,7 @@
 {% if user.is_authenticated and user.id == post.author.id %}
 <form method="POST">
 	{% csrf_token %}
-	<p>Are you sure you want to delete "{{ post.title }}"?</p>
+	<p> <strong>Are you sure you want to delete "{{ post.title }}"?</strong> </p>
 	<input type="submit" value="Confirm" class="btn btn-secondary btn-sm" />
 </form>
 {% else %}
