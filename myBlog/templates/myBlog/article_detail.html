@@ -11,6 +11,9 @@
 <br />
 <small>tags: {{ post.tag }}</small>
 <hr />
+{% if post.image %}
+<img src="{{ post.image.url }}" alt="Post's image">
+{% endif %}
 <p>{{ post.body|safe }}</p>
 <hr>
 <p>

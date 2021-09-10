@@ -21,6 +21,7 @@ class Post(models.Model):
     tag = models.CharField(max_length=255)
     category = models.CharField(max_length=50, default="coding")
     body = RichTextField(blank=True, null=True)
+    image = models.ImageField(null=True, blank=True, upload_to='images/')
     post_time = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name="like_list")
 
