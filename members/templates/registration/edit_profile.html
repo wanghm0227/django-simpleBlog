@@ -8,6 +8,7 @@ Edit Profile
 <br>
 <h2>Edit Profile...</h2>
 <br>
+{{ user.profile.bio }}
 <form method="POST">
   {% csrf_token %}
   <table>
