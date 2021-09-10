@@ -5,7 +5,9 @@
 <br />
 {% if user.is_authenticated %}
 <form method="POST">
-	{% csrf_token %} {{ form.as_p }}
+	{% csrf_token %}
+	{{ form.media }}
+	{{ form.as_p }}
 	<input type="submit" value="Add Post" class="btn btn-secondary btn-sm" />
 </form>
 {% else %}
