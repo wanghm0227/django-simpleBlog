@@ -25,7 +25,6 @@ class SignUpForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
-
     username = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
     first_name = forms.CharField(widget=forms.TextInput(
@@ -33,7 +32,7 @@ class EditProfileForm(UserChangeForm):
     last_name = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={
-                             'class': 'form-control'}))
+                             'class': 'form-control'}))   
 
     class Meta():
         model = User

@@ -6,32 +6,64 @@
 <br />
 <small>{{ post.post_time }}</small>
 <br />
-
 <small>category: <a href="{% url 'category_posts' post.category %}">{{ post.category }}</a></small>
 <br />
 <small>tags: {{ post.tag }}</small>
-<hr />
+<br>
+<br>
+<a href="{% url 'home' %}" class="btn btn-secondary btn-sm">Back to list</a>
+<hr>
 {% if post.image %}
 <img src="{{ post.image.url }}" alt="Post's image">
 {% endif %}
 <p>{{ post.body|safe }}</p>
 <hr>
 <p>
-	<a href="{% url 'home' %}" class="btn btn-secondary btn-sm">Back to list</a>
 	{% if user.id == post.author.id %}
 	<a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit post</a>
 	<a href="{% url 'remove_post' post.pk %}" class="btn btn-secondary btn-sm">Delete post</a>
 	{% endif %}
-	<br>
-	<form action="{% url 'like' post.pk %}" method="POST">
-		{% csrf_token %}
-		<button class="{% if liked %} btn btn-danger btn-sm {% endif %} btn btn-primary btn-sm">Like:
-			{{ post.total_likes }}</button>
-		{% if messages %}
-		{% for message in messages %}
-		<p><strong>{{ message }}</strong></p>
-		{% endfor %}
-		{% endif %}
-	</form>
 </p>
+<form action="{% url 'like' post.pk %}" method="POST">
+	{% csrf_token %}
+	<button class="{% if liked %} btn btn-danger btn-sm {% endif %} btn btn-primary btn-sm">Like:
+		{{ post.total_likes }}</button>
+	{% if messages %}
+	{% for message in messages %}
+	<p><strong>{{ message }}</strong></p>
+	{% endfor %}
+	{% endif %}
+</form>
+<br>
+
+<div class="card mb-3" style="max-width: 540px;">
+	<div class="row g-0">
+		<div class="col-md-4">
+			<img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-start" alt="Author's profile picture">
+		</div>
+		<div class="col-md-8">
+			<div class="card-body">
+				<h5 class="card-title">{{ post.author.first_name }} {{ post.author.last_name }}</h5>
+				<p class="card-text">
+					<small class="text-muted">
+						{% if post.author.profile.website_url %}
+						<a href="{{ post.author.profile.website_url }}">website</a>
+						{% endif %}
+						{% if post.author.profile.facebook_url %}
+						| <a href="{{ post.author.profile.facebook_url }}">facebook</a>
+						{% endif %}
+						{% if post.author.profile.twitter_url %}
+						| <a href="{{ post.author.profile.twitter_url }}">twitter</a>
+						{% endif %}
+						{% if post.author.profile.instagram_url %}
+						| <a href="{{ post.author.profile.instagram_url }}">instagram</a>
+						{% endif %}
+					</small>
+				</p>
+				<p class="card-text">{{ post.author.profile.bio }}</p>
+
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
