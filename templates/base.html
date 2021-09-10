@@ -36,6 +36,8 @@
 					<a class="nav-link {% if url_name == 'add_post' %}active{% endif %}" href="{% url 'add_post' %}">Add Post</a>
 					<a class="nav-link {% if url_name == 'add_category' %}active{% endif %}" href="{% url 'add_category' %}">Add
 						Category</a>
+					<a class="nav-link {% if url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' %}">Edit
+						Profile</a>
 					<a class="nav-link {% if url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">Logout</a>
 					{% else %}
 					<a class="nav-link {% if url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">Login</a>
