@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block title %} {{ post.title }} - My Blog
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ post.title }} - My Blog
 {% endblock %} {% block body %}
 <br>
 <h3>{{ post.title }}</h3>
@@ -39,7 +41,17 @@
 <div class="card mb-3" style="max-width: 540px;">
 	<div class="row g-0">
 		<div class="col-md-4">
-			<img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-start" alt="Author's profile picture">
+			<img src="{% if post.author.profile.profile_pic %}
+			{{ post.author.profile.profile_pic.url }}
+			{% else %}
+			{% static 'myBlog/images/default_profile_pic.png' %}
+			{% endif %}
+			" class="img-fluid rounded-start" alt="Author's profile picture">
+			{% comment %} {% if post.author.profile.profile_pic %}
+			<img src="{{ post.author.profile.profile_pic.url }}" alt="Author's profile picture">
+			{% else %}
+			<img src="{% static 'myBlog/images/default_profile_pic.png' %}" alt="Author's profile picture">
+			{% endif %} {% endcomment %}
 		</div>
 		<div class="col-md-8">
 			<div class="card-body">
