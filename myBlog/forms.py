@@ -16,4 +16,3 @@ class PostForm(forms.ModelForm):
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
-

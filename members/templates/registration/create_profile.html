@@ -6,9 +6,8 @@ Edit Profile
 
 {% block body %}
 <br>
-<h2>Edit Profile...</h2>
+<h2>Create Profile...</h2>
 <br>
-{% if user.is_authenticated and profile.user.id == request.user.id %}
 <form method="POST">
   {% csrf_token %}
   <table>
@@ -19,7 +18,4 @@ Edit Profile
   <input type="submit" value="Update" class="btn btn-secondary btn-sm">
 </form>
 <br><br>
-{% else %}
-<p><strong>Sorry, you're not allowed here.</strong></p>
-{% endif %}
 {% endblock %}
