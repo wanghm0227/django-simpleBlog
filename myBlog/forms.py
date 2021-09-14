@@ -15,4 +15,3 @@ class PostForm(forms.ModelForm):
             'category': forms.Select(choices=CHOICES, attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
-
